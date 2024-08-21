@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <style>
+            body {
+                margin:0;
+                height: 100vh;
+                width: 100vw;
+                box-sizing: border-box;
+            }
+            .homescreen {
+                box-sizing: border-box;
+                height: 100%;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding-bottom: 200px;
+            }
+
+            nav {
+                box-sizing: border-box;
+                margin: 0;
+                height: 50px;
+                width: 100vw;
+                display: flex;
+                padding-right: 50px;
+                flex-direction: row;
+                justify-content: right;
+                align-items:center;
+            }
+            button {
+                height: 80%;
+                width: 100px;
+                border-radius: 15px;
+                background-color: black;
+                color:white
+            }
+            form{
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+    </head>
+    <Body>
+        <nav>
+            <form method = 'POST'>
+                {% csrf_token %}
+                <button type = 'submit'>Hola</button>
+            </form>
+        </nav>
+        <div class ="homescreen">
+            <h1>TO-DO APP</h1>
+            <h3>Gestiona tus tareas de la mejor manera</h3>
+        </div>
+    </Body>
+</html>
