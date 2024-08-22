@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import path, include
 from authentication.views import RegisterView
 
+#urls del proyecto en general, que sirven para acceder a otros lugares como
+#panel de administrador y autenticacion
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("main.urls")),

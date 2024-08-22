@@ -6,22 +6,24 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+#Vista que sirve para retornar la plantilla html de la pagina principal
 def HomeView(request):
-    print("hola mundo!")
     if request.method == "POST":
         return redirect('register')
     return render(request, "main/home.html", {})
 
+#Vista que sirve para retornar la plantilla html de la pagina que contiene
+#Las tareas y tambien maneja el comportamiento del formulario para crear
+#tareas
 def TasksView(request):
     if request.user.is_authenticated:
-        print("usuario: ", request.user)
         if request.method == 'POST':
             form = TaskForm(request.POST)
             if form.is_valid():
                 task = form.save(commit=False)
-                task.userid = request.user  # Asignar el usuario actual
+                task.userid = request.user
                 task.save()
-                return redirect('tasks')  # Redirige a la misma vista para evitar reenvío de formulario
+                return redirect('tasks')
         else:
             form = TaskForm()
 
@@ -34,6 +36,8 @@ def TasksView(request):
     else:
         return redirect('login')
 
+#Vista que sirve para manejar el comportamiento del formulario que permite
+#borrar tareas
 def deletetask(request, taskid):
     if request.user.is_authenticated:
         if request.method == 'POST':
