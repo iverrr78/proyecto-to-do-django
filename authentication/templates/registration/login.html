@@ -36,17 +36,19 @@
                 height: 500px;
                 width: 300px;
                 margin: 0;
-                justify-content: space-between;
+                justify-content: center;
+                gap: 50px;
                 flex-direction: column;
                 align-items: center;
                 padding: 0;
             }
             button {
                 height: 50px;
-                width: 100px;
+                width: 120px;
                 border-radius: 15px;
                 background-color: black;
                 color:white;
+                margin-top: 40px;
                 font-weight: 600;
             }
             form div {
@@ -63,11 +65,11 @@
     </head>
     <body>
         <div class="container">
-            <h3>Registrate</h3>
+            <h3>Iniciar sesion</h3>
             <form method="POST">
                 {% csrf_token %}
                 {{form}}
-                <button type = 'submit'>Registrar</button>
+                <button type = 'submit'>iniciar sesion</button>
             </form>
         </div>
     </body>

@@ -19,7 +19,8 @@ from django.urls import path, include
 from authentication.views import RegisterView
 
 urlpatterns = [
-    #path('admin/', admin.site.urls),
-    path('proyect/', include("main.urls")),
-    path('register', RegisterView, name = "register")
+    path('admin/', admin.site.urls),
+    path('', include("main.urls")),
+    path('register', RegisterView, name = "register"),
+    path('', include("django.contrib.auth.urls"))
 ]

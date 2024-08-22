@@ -1,4 +1,155 @@
-<html>
-    <head></head>
-    <body></body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>Gestión de Tareas</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            font-family: "Raleway", sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #F5F4F0;
+        }
+        .container {
+            display: flex;
+            width: 100%;
+        }
+        .form-container {
+            width: 30%;
+            height: 200px;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #d3d3d3;
+            border-radius: 5px;
+            padding-left: 100px;
+        }
+        .form-container button{
+            background-color: black;
+            color: white;
+            font-weight: 600;
+            margin-left: 80px;
+            margin-top: 15px;
+            border: 0;
+            border-radius: 5px;
+            height: 30px;
+        }
+        .task-list-container {
+            width: 70%;
+            padding: 20px;
+            box-sizing: border-box;
+            height: 100vh;
+        }
+        .task-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            overflow-y: auto;
+            height: 300px;
+        }
+        .task-list-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .task-list-item button {
+            background-color: #ff6b6b;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .noauth {
+            box-sizing: border-box;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        nav {
+                box-sizing: border-box;
+                margin: 0;
+                height: 50px;
+                width: 100vw;
+                display: flex;
+                padding-right: 50px;
+                flex-direction: row;
+                justify-content: right;
+                align-items:center;
+            }
+            .logout {
+                box-sizing: border-box;
+                height: 80%;
+                width: 120px;
+                height: 30px;
+                border-radius: 15px;
+                background-color: black;
+                color:white;
+                text-align: center;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                text-decoration: none;
+                margin-right: 20px;
+                font-weight: 600;
+                font-size: 15px;
+            }
+    </style>
+</head>
+<body>
+    <nav>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button class="logout" type="submit">Cerrar sesion</button>
+        </form>
+        <!-- <form method = 'POST'>
+            {% csrf_token %}
+            <a href=""></a>
+            <button type = 'submit'>Hola</button>
+        </form> -->
+    </nav>
+    <div class="container">
+        <!-- Formulario para crear una tarea -->
+        <div class="form-container">
+            <h2>Crear Tarea</h2>
+            <form method="POST">
+                {% csrf_token %}
+                {{ task_form.as_p }}
+                <button type="submit">Guardar Tarea</button>
+            </form>
+        </div>
+        
+        <!-- Lista de tareas -->
+        <div class="task-list-container">
+            <h2>Lista de Tareas</h2>
+            <ul class="task-list">
+                {% for task in tasks %}
+                    <li class="task-list-item">
+                        {{ task.title }}
+                        <form method="post" action="{% url 'deletetask' task.id %}" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit">Borrar</button>
+                        </form>
+                    </li>
+                {% empty %}
+                    <li class="task-list-item">No hay tareas.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
 </html>

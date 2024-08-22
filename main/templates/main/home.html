@@ -1,11 +1,16 @@
 <html>
     <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
         <style>
             body {
                 margin:0;
                 height: 100vh;
                 width: 100vw;
                 box-sizing: border-box;
+                font-family: "Raleway", sans-serif;
+                background-color: #F5F4F0;
             }
             .homescreen {
                 box-sizing: border-box;
@@ -15,43 +20,65 @@
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                padding-bottom: 200px;
             }
 
             nav {
                 box-sizing: border-box;
                 margin: 0;
-                height: 50px;
+                height: 60px;
                 width: 100vw;
                 display: flex;
                 padding-right: 50px;
                 flex-direction: row;
                 justify-content: right;
                 align-items:center;
+                padding-top: 10px;
             }
-            button {
+            a {
+                box-sizing: border-box;
                 height: 80%;
                 width: 100px;
                 border-radius: 15px;
                 background-color: black;
-                color:white
+                color:white;
+                text-align: center;
+                padding-top: 10px;
+                text-decoration: none;
+                margin-right: 20px;
+                font-weight: 700;
             }
             form{
                 margin: 0;
                 padding: 0;
             }
+            h1 {
+                font-weight: 900;
+                font-size: 100px;
+                margin-bottom: 30px;
+            }
+            h3 {
+                font-size: 20px;
+            }
+            .minihulk {
+                height: 300px;
+                width: 300px;
+            }
         </style>
     </head>
     <Body>
         <nav>
-            <form method = 'POST'>
+            <a href="\login">login</a>
+            <a href="\register">singup</a>
+            <!-- <form method = 'POST'>
                 {% csrf_token %}
+                <a href=""></a>
                 <button type = 'submit'>Hola</button>
-            </form>
+            </form> -->
         </nav>
         <div class ="homescreen">
             <h1>TO-DO APP</h1>
             <h3>Gestiona tus tareas de la mejor manera</h3>
+            <img class="minihulk" src = "https://cdn.dribbble.com/users/1155106/screenshots/5909424/hulk.gif">
         </div>
     </Body>
 </html>

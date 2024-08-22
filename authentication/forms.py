@@ -17,14 +17,9 @@ class RegisterUserForm(UserCreationForm):
         help_text=None  # Eliminar el texto de ayuda
     )
 
-    usable_password = forms.CharField(
-        widget=None,
-        help_text=None
-    )
-
     class Meta:
         model = User
-        fields = ["username", "email", "password1", "password2", "usable_password"]
+        fields = ["username", "email", "password1", "password2"]
         help_texts = {
             'username': None,  # Eliminar el texto de ayuda predeterminado
             'password1': None,

@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import *
 from .models import *
 import random
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -11,17 +12,33 @@ def HomeView(request):
         return redirect('register')
     return render(request, "main/home.html", {})
 
-def RegisterView(request):
-    if request.method == 'POST':
-        form = UserForm(request.POST)
-        if form.is_valid():
-            Username = form.cleaned_data["username"]
-            Email = form.cleaned_data["email"]
-            Password = form.cleaned_data["password"]
-            Userid = random.randint(1, 100000000)
-            user = User(userid = Userid, username = Username, email = Email, password = Password)
-            user.save()
-            return redirect()
+def TasksView(request):
+    if request.user.is_authenticated:
+        print("usuario: ", request.user)
+        if request.method == 'POST':
+            form = TaskForm(request.POST)
+            if form.is_valid():
+                task = form.save(commit=False)
+                task.userid = request.user  # Asignar el usuario actual
+                task.save()
+                return redirect('tasks')  # Redirige a la misma vista para evitar reenvío de formulario
+        else:
+            form = TaskForm()
+
+        tasks = Task.objects.filter(userid=request.user)
+
+        return render(request, 'main/tasks.html', {
+            'task_form': form,
+            'tasks': tasks
+        })
     else:
-        form = UserForm()
-        return render(request, "main/register.html", {'form': form})
+        return redirect('login')
+
+def deletetask(request, taskid):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            task = get_object_or_404(Task, id=taskid, userid=request.user)
+            task.delete()
+            return redirect('tasks')
+    else:
+        return redirect('login')
