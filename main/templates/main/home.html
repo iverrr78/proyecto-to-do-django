@@ -1,5 +1,6 @@
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -63,22 +64,108 @@
                 height: 300px;
                 width: 300px;
             }
+            .sidebar {
+                height: 100vh;
+                width: 250px;
+                background-color: #333;
+                position: fixed;
+                top: 0;
+                left: -250px; /* Oculto fuera de la pantalla */
+                transition: left 0.3s ease;
+                padding-top: 60px; /* Espacio para el botón de hamburguesa */
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .sidebar a {
+                padding: 10px;
+                text-decoration: none;
+                color: white;
+                display: block;
+                margin: 10px 0;
+                height: 40px;
+                background-color: transparent;
+            }
+            .hamburger {
+            display: none; /* Oculto por defecto */
+            font-size: 30px;
+            cursor: pointer;
+            padding: 10px;
+            background: none;
+            border: none;
+            color: black;
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 2;
+        }
+
+            @media (max-width: 600px) {
+                nav {
+                display: none; /* Ocultar barra de navegación normal */
+            }
+
+            .hamburger {
+                display: block; /* Mostrar botón de hamburguesa */
+            }
+
+            .hamburger.active {
+                color: white
+            }
+
+            .sidebar.active {
+                left: 0; /* Muestra el menú lateral */
+            }
+
+            .homescreen {
+                padding-top: 60px; /* Ajustar espacio para el botón de hamburguesa */
+            }
+
+            h1 {
+                font-size: 10vw; /* Ajuste de tamaño de fuente para móviles */
+            }
+
+            h3 {
+                font-size: 5vw; /* Ajuste de tamaño de fuente para móviles */
+                width: 70%;
+                word-wrap: break-word; /* Envuelve palabras largas */
+                overflow-wrap: break-word; /* Alternativa moderna a word-wrap */
+                word-break: break-word; /* Permite romper palabras largas */
+                white-space: normal;
+                text-align: center;
+            }
+
+            .minihulk {
+                height: 50vw; /* Ajuste de tamaño de imagen para móviles */
+                width: 50vw;
+            }
+            
+        }
         </style>
     </head>
     <Body>
         <nav>
             <a href="\login">login</a>
             <a href="\register">singup</a>
-            <!-- <form method = 'POST'>
-                {% csrf_token %}
-                <a href=""></a>
-                <button type = 'submit'>Hola</button>
-            </form> -->
         </nav>
+        <div class="sidebar" id="sidebar">
+            <a href="\login">Login</a>
+            <a href="\register">Signup</a>
+        </div>
+        <button class="hamburger" id="hamburger" onclick="toggleSidebar()">&#9776;</button>
         <div class ="homescreen">
             <h1>TO-DO APP</h1>
             <h3>Gestiona tus tareas de la mejor manera</h3>
             <img class="minihulk" src = "https://cdn.dribbble.com/users/1155106/screenshots/5909424/hulk.gif">
         </div>
+        <script>
+            // Función para alternar la visibilidad del menú lateral
+            function toggleSidebar() {
+                var sidebar = document.getElementById('sidebar');
+                var hamburger = document.getElementById('hamburger');
+                sidebar.classList.toggle('active');
+                hamburger.classList.toggle('active')
+            }
+        </script>
     </Body>
 </html>
